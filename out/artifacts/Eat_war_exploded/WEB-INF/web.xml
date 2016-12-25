@@ -12,4 +12,15 @@
         <servlet-name>SearchRestaurants</servlet-name>
         <url-pattern>/Eat/restaurants</url-pattern>
     </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>VisitHistory</servlet-name>
+        <servlet-class>api.VisitHistory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VisitHistory</servlet-name>
+        <url-pattern>/Eat/history</url-pattern>
+    </servlet-mapping>
 </web-app>
