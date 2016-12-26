@@ -23,4 +23,14 @@
         <servlet-name>VisitHistory</servlet-name>
         <url-pattern>/Eat/history</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Recommendation</servlet-name>
+        <servlet-class>api.RecommendRestaurants</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Recommendation</servlet-name>
+        <url-pattern>/Eat/recommendation</url-pattern>
+    </servlet-mapping>
 </web-app>

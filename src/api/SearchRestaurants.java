@@ -1,5 +1,7 @@
 package api;
 
+import db.DBConnection;
+import db.MySQLDBConnection;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +21,10 @@ import java.util.List;
  */
 @WebServlet(name = "SearchRestaurants")
 public class SearchRestaurants extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static DBConnection connection = new MySQLDBConnection();
+
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,19 +33,15 @@ public class SearchRestaurants extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         JSONArray array = new JSONArray();
-        try {
-            if (request.getParameterMap().containsKey("user_id")
-                    && request.getParameterMap().containsKey("lat")
-                    && request.getParameterMap().containsKey("lon")) {
-                String userId = request.getParameter("user_id");
-                double lat = Double.parseDouble(request.getParameter("lat"));
-                double lon = Double.parseDouble(request.getParameter("lon"));
-                // return some fake restaurants
-                array.put(new JSONObject().put("name", "Panda Express"));
-                array.put(new JSONObject().put("name", "Hong Kong Express"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (request.getParameterMap().containsKey("user_id")
+                && request.getParameterMap().containsKey("lat")
+                && request.getParameterMap().containsKey("lon")) {
+            String userId = request.getParameter("user_id");
+            double lat = Double.parseDouble(request.getParameter("lat"));
+            double lon = Double.parseDouble(request.getParameter("lon"));
+            array = connection.searchRestaurants(userId, lat, lon);
+
+
         }
         RpcParser.writeOutput(response, array);
     }
